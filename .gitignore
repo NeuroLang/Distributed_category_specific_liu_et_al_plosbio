@@ -11,6 +11,7 @@ wheels/
 data-neurosynth_version*
 icbm/
 neurosynth/
+output/
 
 # Virtual environments
 .venv
