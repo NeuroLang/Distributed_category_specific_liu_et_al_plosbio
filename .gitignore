@@ -8,6 +8,9 @@ wheels/
 *lock
 *nii.gz
 *png
+data-neurosynth_version*
+icbm/
+neurosynth/
 
 # Virtual environments
 .venv
