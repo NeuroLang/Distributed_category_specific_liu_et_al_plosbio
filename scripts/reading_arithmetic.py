@@ -18,64 +18,6 @@ nl = engines.NeurosynthEngineConf(folder).create()
 
 # %%
 
-query_executive = """
-TermInStudy(term, study) :- TermInStudyTFIDF(term, tfidf, study)  & ( tfidf > 0.01 )
-ExecutiveFunctionTerm("attention")
-ExecutiveFunctionTerm("cognitive control")
-ExecutiveFunctionTerm("working memory")
-ExecutiveFunctionTerm("inhibition")
-ExecutiveFunctionTerm("shifting")
-ExecutiveFunctionTerm("executive function")
-StudyOfInterest(study) :- TermInStudy(t, study) & ExecutiveFunctionTerm(t)                             
-VoxelReported (x, y, z, study) :- PeakReported(x2, y2, z2, study) & Voxel(x, y, z) & (d == EUCLIDEAN(x, y, z, x2, y2, z2)) & (d < 4)
-Activation(x, y, z) :- SelectedStudy(s) & VoxelReported(x, y, z, s)
-ActivationGivenEF(x, y, z, PROB) :- Activation(x, y, z) // (StudyOfInterest(s) & SelectedStudy(s))
-
-Image(agg_create_region_overlay(x, y, z, p)) :- ActivationGivenEF(x, y, z, p)
-
-"""
-
-query_not_arithmetic_reading = """
-VoxelReported (x, y, z, study) :- PeakReported(x2, y2, z2, study) & Voxel(x, y, z) & (d == EUCLIDEAN(x, y, z, x2, y2, z2)) & (d < 4)
-TermInStudy(term, study) :- TermInStudyTFIDF(term, tfidf, study)  & (tfidf > 0.01)
-StudyOfInterest(study) :-  ~TermInStudy("arithmetic", study) & TermInStudy("reading", study)
-Activation(x, y, z) :- SelectedStudy(s) & VoxelReported(x, y, z, s)
-ActivationGivenBoth(x, y, z, PROB) :- Activation(x, y, z) // (StudyOfInterest(s) & SelectedStudy(s))
-
-Image(agg_create_region_overlay(x, y, z, p)) :- ActivationGivenBoth(x, y, z, p)
-"""
-
-query_arithmetic_not_reading = """
-VoxelReported (x, y, z, study) :- PeakReported(x2, y2, z2, study) & Voxel(x, y, z) & (d == EUCLIDEAN(x, y, z, x2, y2, z2)) & (d < 4)
-TermInStudy(term, study) :- TermInStudyTFIDF(term, tfidf, study)  & (tfidf > 0.01)
-StudyOfInterest(study) :-  TermInStudy("arithmetic", study) & ~TermInStudy("reading", study)
-Activation(x, y, z) :- SelectedStudy(s) & VoxelReported(x, y, z, s)
-ActivationGivenBoth(x, y, z, PROB) :- Activation(x, y, z) // (StudyOfInterest(s) & SelectedStudy(s))
-
-Image(agg_create_region_overlay(x, y, z, p)) :- ActivationGivenBoth(x, y, z, p)
-"""
-
-query_arithmetic_reading = """
-VoxelReported (x, y, z, study) :- PeakReported(x2, y2, z2, study) & Voxel(x, y, z) & (d == EUCLIDEAN(x, y, z, x2, y2, z2)) & (d < 4)
-TermInStudy(term, study) :- TermInStudyTFIDF(term, tfidf, study)  & (tfidf > 0.01)
-StudyOfInterest(study) :-  TermInStudy("arithmetic", study) & TermInStudy("reading", study)
-Activation(x, y, z) :- SelectedStudy(s) & VoxelReported(x, y, z, s)
-ActivationGivenBoth(x, y, z, PROB) :- Activation(x, y, z) // (StudyOfInterest(s) & SelectedStudy(s))
-
-Image(agg_create_region_overlay(x, y, z, p)) :- ActivationGivenBoth(x, y, z, p)
-"""
-
-query_arithmetic_or_reading = """
-VoxelReported (x, y, z, study) :- PeakReported(x2, y2, z2, study) & Voxel(x, y, z) & (d == EUCLIDEAN(x, y, z, x2, y2, z2)) & (d < 4)
-TermInStudy(term, study) :- TermInStudyTFIDF(term, tfidf, study)  & (tfidf > 0.01)
-StudyOfInterest(study) :-  TermInStudy("arithmetic", study)
-StudyOfInterest(study) :-  TermInStudy("reading", study)
-Activation(x, y, z) :- SelectedStudy(s) & VoxelReported(x, y, z, s)
-ActivationGivenBoth(x, y, z, PROB) :- Activation(x, y, z) // (StudyOfInterest(s) & SelectedStudy(s))
-
-Image(agg_create_region_overlay(x, y, z, p)) :- ActivationGivenBoth(x, y, z, p)
-"""
-
 query_digit_not_letter = """
 VoxelReported (x, y, z, study) :- PeakReported(x2, y2, z2, study) & Voxel(x, y, z) & (d == EUCLIDEAN(x, y, z, x2, y2, z2)) & (d < 4)
 TermInStudy(term, study) :- TermInStudyTFIDF(term, tfidf, study)  & (tfidf > 0.01)
@@ -99,11 +41,6 @@ Image(agg_create_region_overlay(x, y, z, p)) :- ActivationGivenBoth(x, y, z, p)
 # %%
 
 queries = [
-    # (query_executive, "executive_funcion_meta.nii.gz"),
-    # (query_not_arithmetic_reading, "not_arithmetic_reading_meta.nii.gz"),
-    # (query_arithmetic_not_reading, "arithmetic_not_reading_meta.nii.gz"),
-    # (query_arithmetic_reading, "arithmetic_and_reading_meta.nii.gz"),
-    # (query_arithmetic_or_reading, "arithmetic_or_reading_meta.nii.gz"),
     (query_digit_not_letter, "query_digit_not_letter_meta.nii.gz"),
     (query_not_digit_letter, "query_not_digit_letter_meta.nii.gz"),
 ]
