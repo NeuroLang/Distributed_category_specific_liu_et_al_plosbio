@@ -28,6 +28,7 @@ def run_reverse_meta_analysis(output_folder=OUTPUT_FOLDER, data_folder=DATA_FOLD
         subprocess.call(command, shell=True)
         print("=" * 20)
         output_summaries.append(output_summary + ".csv")
+    return output_summaries
 
 
 def get_colordict(palette, number, start):
