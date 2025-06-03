@@ -3,7 +3,6 @@ import os
 import pathlib
 
 import nibabel as nib
-import numpy as np
 from matplotlib import pyplot as plt
 from neurolang.utils.server import engines
 from nilearn import plotting
@@ -62,6 +61,5 @@ for _, fname in queries:
     fname = str(output_folder / fname)
     nii = nib.load(fname)
     data = nii.get_fdata()
-    thr = np.percentile(data[data > 0], 95)
-    plotting.plot_stat_map(nii, threshold=thr, title=fname, display_mode="mosaic")
+    plotting.plot_glass_brain(nii, threshold=0.01, colorbar=True, display_mode='lyrz')
     plt.savefig(fname.replace(".nii.gz", ".png"))
