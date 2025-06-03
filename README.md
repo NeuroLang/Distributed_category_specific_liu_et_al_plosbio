@@ -1,7 +1,7 @@
 # Meta analysis scripts for Liu et al. Brain-wide Decoding of Numbers and Letters: Converging Evidence from Multivariate fMRI Analysis and Probabilistic Meta-Analysis
 
 ## To run the scripts
-If you have the [uv tool](https://docs.astral.sh/uv/concepts/tools/) installed :
+If you have the [uv tool](https://docs.astral.sh/uv/) installed :
 
 1. Clone the repository: `git clone https://github.com/NeuroLang/Distributed_category_specific_liu_et_al_plosbio.git`
 2. On the repository folder run the command: `uv sync`
