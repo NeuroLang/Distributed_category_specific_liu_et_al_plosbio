@@ -115,9 +115,6 @@ def plot_reverse_meta_analysis(summary_fname):
 
 
 if __name__ == "__main__":
-    if False:
-        output_summaries = run_reverse_meta_analysis()
-    else:
-        output_summaries = OUTPUT_FOLDER.glob("*_summary.csv")
+    output_summaries = run_reverse_meta_analysis()
     for output_summary in output_summaries:
         plot_reverse_meta_analysis(output_summary)
