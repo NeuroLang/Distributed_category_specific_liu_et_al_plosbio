@@ -1,4 +1,4 @@
-#Meta analysis scripts for Liu et al. Brain-wide Decoding of Numbers and Letters: Converging Evidence from Multivariate fMRI Analysis and Probabilistic Meta-Analysis
+# Meta analysis scripts for Liu et al. Brain-wide Decoding of Numbers and Letters: Converging Evidence from Multivariate fMRI Analysis and Probabilistic Meta-Analysis
 
 ## To run the scripts
 If you have the [uv tool](https://docs.astral.sh/uv/concepts/tools/) installed :

@@ -60,6 +60,5 @@ for query, fname in queries:
 for _, fname in queries:
     fname = str(output_folder / fname)
     nii = nib.load(fname)
-    data = nii.get_fdata()
     plotting.plot_glass_brain(nii, threshold=0.01, colorbar=True, display_mode='lyrz')
     plt.savefig(fname.replace(".nii.gz", ".png"))
